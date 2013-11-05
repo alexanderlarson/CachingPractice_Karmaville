@@ -1,0 +1,34 @@
+<h1>KarmaVille's Most Famous</h1>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Karma</th>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+  </tr>
+  <% @users.each do |user| %>
+    <%= render 'user_row', :user => user %>
+  <% end %>
+</table>
+
+<div class="pagination">
+  <ul>
+    <li><a href="/?page=1">First</a></li>
+    
+    <li><a href="/?page=<%= params[:page].to_i - 1 <= 0 ? 1 : params[:page].to_i - 1 %>">Prev</a></li>
+    
+    <li><a href="/?page=<%= params[:page].to_i < 3 ? 1 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 4 : params[:page].to_i - 2 %>"><%= params[:page].to_i < 3 ? 1 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 4 : params[:page].to_i - 2 %></a></li>
+
+    <li><a href="/?page=<%= params[:page].to_i < 3 ? 2 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 3 : params[:page].to_i - 1 %>"><%= params[:page].to_i < 3 ? 2 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 3 : params[:page].to_i - 1 %></a></li>
+    
+    <li><a href="/?page=<%= params[:page].to_i < 3 ? 3 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 2 : params[:page] %>"><%= params[:page].to_i < 3 ? 3 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 2 : params[:page] %></a></li>
+    
+    <li><a href="/?page=<%= params[:page].to_i < 3 ? 4 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 1 : params[:page].to_i + 1 %>"><%= params[:page].to_i < 3 ? 4 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) - 1 : params[:page].to_i + 1 %></a></li>
+    
+    <li><a href="/?page=<%= params[:page].to_i < 3 ? 5 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) : params[:page].to_i + 2 %>"><%= params[:page].to_i < 3 ? 5 : params[:page].to_i > (User.count / 50 ) ? (User.count / 50) : params[:page].to_i + 2 %></a></li>
+    
+    <li><a href="/?page=<%= params[:page].to_i + 1 >= (User.count / 50) ? (User.count / 50) : params[:page].to_i + 1 %>">Next</a></li>
+    
+    <li><a href="/?page=<%= (User.count / 50) %>">Last</a></li>
+  </ul>
+</div>
